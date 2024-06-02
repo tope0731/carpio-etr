@@ -1,9 +1,8 @@
+@include('libraries.styles')
 @extends('layout')
 @section('content')
 <style>
-    body{
-    background:#eee;    
-}
+   
 .main-box.no-header {
     padding-top: 20px;
 }
@@ -15,7 +14,6 @@
     -ms-box-shadow: 1px 1px 2px 0 #CCCCCC;
     box-shadow: 1px 1px 2px 0 #CCCCCC;
     margin-bottom: 16px;
-    -webikt-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
 }
@@ -50,7 +48,7 @@ a {
 
 .table thead tr th {
     text-transform: uppercase;
-    font-size: 0.875em;
+    font-size: 0.975em;
 }
 .table thead tr th {
     border-bottom: 2px solid #e7ebee;
@@ -69,7 +67,7 @@ a:hover{
 text-decoration:none;
 }
 </style>
-<div class="container bootstrap snippets bootdey">
+<div class="container">
     <div class="row">
         <div class="col-lg-12">
             <div class="main-box no-header clearfix">

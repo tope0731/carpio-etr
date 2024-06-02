@@ -1,29 +1,7 @@
+@include('libraries.styles')
 @extends('layout')
 @section('content')
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
-    }
-
-    header,
-    footer {
-        background-color: #003366;
-        color: white;
-        text-align: center;
-        padding: 1em 0;
-    }
-
-    .container {
-        padding: 20px;
-    }
-
-    h1 {
-        color: #003366;
-    }
-
     .requirements,
     .note {
         background-color: white;
@@ -34,12 +12,8 @@
     }
 
     a {
-        color: #003366;
+        color: #003366; 
         text-decoration: none;
-    }
-
-    a:hover {
-        text-decoration: underline;
     }
 
     .btn-primary {
@@ -54,11 +28,12 @@
     .btn-primary:hover {
         background-color: #002245;
     }
+    
 </style>
 <div class="container">
     <section class="requirements">
         <h2>Admission Requirements</h2>
-        <p>Deadline of Application - May 17, 2024</p>
+        <p>Deadline of Application - May 17, 2025</p>
         <ol>
             <li>Please ensure that you have a softcopy of the following requirements to be uploaded before proceeding:
                 <ul>
@@ -76,7 +51,7 @@
         </ol>
     </section>
     <section class="note">
-        <p><strong>Note:</strong> Some academic programs may have other officially approved requirements prior to admission. If you wish to change any part of the application, contact the campus where the application was submitted.</p>
+        <p style="color: red;"><strong>Note:</strong> Some academic programs may have other officially approved requirements prior to admission. If you wish to change any part of the application, contact the campus where the application was submitted.</p>
     </section>
     <a href="/admission" class="btn btn-primary">Proceed to Registration</a>
 </div>

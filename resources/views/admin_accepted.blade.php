@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container mt-5">
-    <h1>Accepted Admissions</h1>
+    <h1>Accepted Applicants</h1>
     
     @if($acceptedAdmissions->isEmpty())
         <div class="alert alert-info mt-3" role="alert">

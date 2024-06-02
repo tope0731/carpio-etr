@@ -1,11 +1,13 @@
 <!-- resources/views/admission/show.blade.php -->
-
+@include('libraries.styles')
 @extends('layout')
 
 @section('content')
 <div class="container mt-5">
-    <h1>Student Details</h1>
-    
+    <div class="student-info">
+        <h1 style="display: inline;">Student Details</h1>
+        <h3 style="display: inline; margin-left: 700px;">{{ $student->application_status ?? 'waiting for approval' }}</h3>
+    </div>
     <!-- Admission Information Table -->
     <div class="card mt-4">
         <div class="card-header">
@@ -201,6 +203,6 @@
         </div>
     </div>
 
-    <a href="{{ route('admission.search') }}" class="btn btn-secondary mt-3">Back to Search Results</a>
+    <a href="{{ route('application') }}" class="btn btn-secondary mt-3">Back to Search Results</a>
 </div>
 @endsection

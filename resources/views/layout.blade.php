@@ -12,10 +12,22 @@
             padding: 0;
             background-color: #f4f4f4;
         }
-
-        .navbar {
-            background-color: #003366;
+        .container-top {
+            background-color: #f4f4f4;
             color: white;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            height: 200px;
+            z-index: 9999;
+        }
+        .navbar{
+            top: 130;
+            
+        }
+        .navbar-nav .nav-link.active {
+            color: #007bff; /* Change this color to your desired active link color */
+            font-weight: bold; /* Optional: Makes the active link bold */
         }
 
         .navbar-brand {
@@ -33,41 +45,59 @@
         }
 
         .container {
-            padding: 20px;
+            padding-top: 120px; /* Adjust padding-top to give space for the navbar */
+        }
+
+        .text-center {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            text-align: center;
+            z-index: 9999;
         }
 
         h3 {
             margin: 0;
             padding: 0;
         }
+
+        .admission{
+            top:125 ;
+        }
+        h2 {
+            color: #0323d9;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <div class="container-fluid">
-                        <a class="navbar-brand" href="/requirements">PSU ADMISSION SYSTEM</a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                            <div class="navbar-nav">
-                                <a class="nav-link active" aria-current="page" href="/">Requirements</a>
-                                <a class="nav-link active" aria-current="page" href="/selection">Selection Process</a>
-                                <a class="nav-link active" aria-current="page" href="/application">Application</a>
-                                <a class="nav-link active" aria-current="page" href="/contact">Contact Us</a>
-                            </div>
-                        </div>
-                    </div>
-                </nav>
-            </div>
-            <div>
-                @yield('content')
+<div class="container-top">
+    <div class="text-center">
+        <img src="{{ asset('storage/photos/PSU-LABEL-LOGO.png') }}" alt="PSU Admission Banner" class="img-fluid" style="width: 600px; height: auto;" />
+    </div>
+    <p style="color: blue; font-size: 30px; font-weight: bold;" class="text-center admission">ADMISSION SYSTEM</p><br>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid ">
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="{{ route('requirements') }}">Requirements</a>
+                <a class="nav-link {{ Request::is('selection') ? 'active' : '' }}" href="{{ route('selection') }}">Selection Process</a>
+                <a class="nav-link {{ Request::is('application') ? 'active' : '' }}" href="{{ route('application') }}">Application Status</a>
+                <a class="nav-link {{ Request::is('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Contact Us</a>
             </div>
         </div>
     </div>
-    @include('libraries.scripts')
+</nav>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            @yield('content')
+        </div>
+    </div>
+</div>
+
+@include('libraries.scripts')
 </body>
 </html>

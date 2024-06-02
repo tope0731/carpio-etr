@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container mt-5">
-    <h1>All Admissions</h1>
+    <h1>All Applicants</h1>
     
     @if($admissions->isEmpty())
         <div class="alert alert-info mt-3" role="alert">
@@ -18,8 +18,6 @@
                     <th scope="col">Campus</th>
                     <th scope="col">Admission Status</th>
                     <th scope="col">First Choice</th>
-                    <th scope="col">Second Choice</th>
-                    <th scope="col">Third Choice</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
@@ -30,12 +28,10 @@
                         <td>{{ $admission->campus }}</td>
                         <td>{{ $admission->admission_status }}</td>
                         <td>{{ $admission->first_choice }}</td>
-                        <td>{{ $admission->second_choice }}</td>
-                        <td>{{ $admission->third_choice }}</td>
                         <td>
                             <a href="{{ route('admission.showAll', $admission->id) }}" class="btn btn-primary btn-sm">
                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                View Details
+                                    Details
                             </a>
                             <form action="{{ route('admission.accept', $admission->id) }}" method="POST" style="display:inline;">
                                 @csrf
@@ -44,6 +40,7 @@
                                     Accept
                                 </button>
                             </form>
+                            
                             <form action="{{ route('admission.waitlist', $admission->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 <button type="submit" class="btn btn-warning btn-sm">

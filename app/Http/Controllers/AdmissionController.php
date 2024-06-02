@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\AdmissionInformation;
 
 
-
-
 class AdmissionController extends Controller
 {
 
@@ -33,8 +31,6 @@ class AdmissionController extends Controller
         // Your existing validation rules
         'grades' => 'required|file|mimes:jpeg,png,jpg|max:8192',
         'photo' => 'required|file|mimes:jpeg,png,jpg|max:8192',
-        // Add validation rules for other fields
-        // Example:
         'campus' => 'required|string',
         'application_status' => 'nullable|string',
         'admission_status' => 'required|string',
@@ -124,11 +120,41 @@ public function search(Request $request)
     return view('search_results', ['results' => $results]);
 }
 
-public function show($id)
+    public function show($id)
     {
         $student = AdmissionInformation::findOrFail($id);
-        return view('show', ['student' => $student]);
+        return view('checkbday', ['student' => $student]);
     }
+
+    public function showResult($id)
+    {
+        $student = AdmissionInformation::findOrFail($id);
+        return view('show', compact('student'));
+    }
+
+
+    public function checkBirthday(Request $request, $id)
+    {
+        // Validate the request data
+        $request->validate([
+            'bday' => 'required|date',
+        ]);
+
+        // Retrieve the user input
+        $userInputBirthday = $request->input('bday');
+
+        // Retrieve the student's birthdate from the database using the student ID
+        $student = AdmissionInformation::findOrFail($id);
+        $studentBirthDate = $student->birth_date;
+
+        // Compare the user input birthdate with the student's birthdate
+        if ($userInputBirthday === $studentBirthDate) {
+            return redirect()->route('show', ['id' => $student->id]);
+        } else {    
+            return redirect()->back()->with('error', 'Invalid Birthdate.');
+        }
+    }
+
 
     public function index()
     {
@@ -169,7 +195,7 @@ public function showRejected()
 public function reject($id)
 {
     $admission = AdmissionInformation::findOrFail($id);
-    $admission->application_status = 'reject';
+    $admission->application_status = 'rejected  ';
     $admission->save();
 
     return redirect()->route('admissions.index')->with('success', 'Applicant rejected successfully.');

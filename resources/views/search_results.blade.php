@@ -1,5 +1,5 @@
 <!-- resources/views/search_results.blade.php -->
-
+@include('libraries.styles')
 @extends('layout')
 
 @section('content')
