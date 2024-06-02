@@ -3,9 +3,12 @@
 @extends('admin_layout')
 
 @section('content')
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">All Applicants</h1>
+                </div>
+
 <div class="container mt-5">
-    <h1>All Applicants</h1>
-    
+
     @if($admissions->isEmpty())
         <div class="alert alert-info mt-3" role="alert">
             No admissions found.
@@ -61,5 +64,6 @@
             </tbody>
         </table>
     @endif
+</div>
 </div>
 @endsection

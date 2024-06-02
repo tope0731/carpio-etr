@@ -161,6 +161,22 @@ public function search(Request $request)
         $admissions = AdmissionInformation::whereNull('application_status')->get();
         return view('admin', ['admissions' => $admissions]);
     }
+
+    public function dashboard()
+    {
+        $totalAdmissions = AdmissionInformation::count();
+        $totalAdmissionsAccepted = AdmissionInformation::where('application_status', 'accepted')->count();
+        $totalAdmissionsRejected = AdmissionInformation::where('application_status', 'rejected')->count();
+        $totalAdmissionsWaitlisted = AdmissionInformation::where('application_status', 'waitlist')->count();
+        $totalAdmissionsNull = AdmissionInformation::whereNull('application_status')->count();
+
+        $part = $totalAdmissions - $totalAdmissionsNull;
+
+        $percentage = ($part/$totalAdmissions) * 100; 
+        return view('admin_dashboard', ['totalAdmissions' => $totalAdmissions, 'totalAdmissionsAccepted' => $totalAdmissionsAccepted,'totalAdmissionsRejected' => $totalAdmissionsRejected,'totalAdmissionsWaitlisted' => $totalAdmissionsWaitlisted,'totalAdmissionsNull' => $totalAdmissionsNull,'percentage' => $percentage, 'part' => $part,]);
+    }
+
+
     public function showAll($id)
     {
         $student = AdmissionInformation::findOrFail($id);
