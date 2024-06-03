@@ -1,16 +1,74 @@
 @extends('admin_layout')
 
-@section('content')              
+@section('content')      
+<style>
+    .dropdown-form {
+    margin-top: 20px; /* Adjust as needed */
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: #3498db;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #2980b9;
+}
+
+</style>       
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                        <form action="{{ route('filterYearDashboard') }}" method="GET">
+                            <div class="dropdown">
+                            <button class="dropbtn">{{ $filter ?? 'Filter by year' }}</button>
+                                <div class="dropdown-content">
+                                    <a href="/admin/dashboard">All</a>
+                                    <a href="{{ route('filterYearDashboard', ['filterYear' => 2024]) }}">2024</a>
+                                    <a href="{{ route('filterYearDashboard', ['filterYear' => 2023]) }}">2023</a>
+                                    <a href="{{ route('filterYearDashboard', ['filterYear' => 2022]) }}">2022</a>
+                                    <a href="{{ route('filterYearDashboard', ['filterYear' => 2021]) }}">2021</a>
+                                    <!-- Add more years as needed -->
+                                </div>
+                            </div>
+                        </form>
                 </div>
+                
 
                     <!-- Content Row -->
                     <div class="row">
-
-                        
 
                         <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
@@ -36,7 +94,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">REVIEWED DONE
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">

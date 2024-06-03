@@ -1,5 +1,5 @@
 @include('libraries.styles')
-@extends('layout')
+@extends('admin_layout')
 
 @section('content')
 <style>
@@ -8,7 +8,7 @@
             padding-bottom: 20px;
         }
         h1 {
-            color: black;
+            color: #e4cb33;
         }
         h2 {
             color: #0323d9;
@@ -217,7 +217,9 @@
         box-sizing: border-box;
         margin-bottom: 10px;
     }
-    button[type="submit"] {
+    
+
+    .top {
             background-color: #007bff;
             color: #ffffff;
             padding: 10px 20px;
@@ -225,18 +227,15 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
-        }
-        button[type="submit"]:hover {
-            background-color: #0056b3;
+            display: block;
+            margin: 0 auto;
+            width: 200px;
+            text-align: center;
+            text-decoration: none;
         }
 
     </style>
 <div class="container">
-    <div class="student-info">
-        <h1 style="display: inline;">Student Details</h1>
-        <h3 style="display: inline; margin-left: 700px;">{{ $student->application_status ?? 'waiting for approval' }}</h3>
-    </div>
-    <br>
     <div  class="content-data2">
         <section class="section">
             <h2>Admission Information </h2><br>
@@ -395,7 +394,7 @@
             </div>
             
         </section>
-    </div><br>
+    </div>
     <div class="content-data2">
         <section class="section">
             <h2>Other Information</h2>
@@ -412,6 +411,7 @@
             <input type="text" value="{{ $student->als_year}}" readonly>
             <input type="text" value="{{ $student->als_average}}" readonly>
             </div>
+            
             
             <div class="form-row">
                 <label for="4ps">Is the Student's family a 4Ps Beneficiary?</label>
@@ -454,8 +454,7 @@
             </div>
         </section>
     </div><br>
-    <button type="submit" style="display: block; margin: 0 auto; width: 200px;"><a href="#" style="color: white" >Back to top</a></button>
-    <br><br>
+    <a href="#" class="top">Back to top</a><br>
     
     </div>
 @endsection

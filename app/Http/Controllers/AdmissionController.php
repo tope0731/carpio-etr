@@ -10,8 +10,10 @@ class AdmissionController extends Controller
 {
 
     protected $admission_information;
+    protected $filter;
     public function __construct(){
         $this->admission_information = new AdmissionInformation();
+        $this->filter = date('Y');
     }
 
     public function showForm()
@@ -155,12 +157,42 @@ public function search(Request $request)
         }
     }
 
-
+    //ADMIN START TODO:
     public function index()
     {
-        $admissions = AdmissionInformation::whereNull('application_status')->get();
+        $admissions = AdmissionInformation::all();
         return view('admin', ['admissions' => $admissions]);
     }
+
+    public function filterYear(Request $request)
+    {
+        $this->filter = $request->input('filterYear');
+        $admissions = AdmissionInformation::whereYear('created_at', $this->filter)->get();
+        return view('admin', ['admissions' => $admissions, 'filter' => $this->filter]);
+    }
+
+    public function filterYearAccepted(Request $request)
+    {
+        $this->filter = $request->input('filterYear');
+        $acceptedAdmissions = AdmissionInformation::whereYear('created_at', $this->filter)->get();
+        return view('admin_accepted', ['acceptedAdmissions' => $acceptedAdmissions, 'filter' => $this->filter]);
+    }
+
+    public function filterYearRejected(Request $request)
+    {
+        $this->filter = $request->input('filterYear');
+        $acceptedAdmissions = AdmissionInformation::whereYear('created_at', $this->filter)->get();
+        return view('admin_rejected', ['acceptedAdmissions' => $acceptedAdmissions, 'filter' => $this->filter]);
+    }
+
+    public function filterYearWaitlisted(Request $request)
+    {
+        $this->filter = $request->input('filterYear');
+        $acceptedAdmissions = AdmissionInformation::whereYear('created_at', $this->filter)->get();
+        return view('admin_rejected', ['acceptedAdmissions' => $acceptedAdmissions, 'filter' => $this->filter]);
+    }
+
+
 
     public function dashboard()
     {
@@ -172,15 +204,55 @@ public function search(Request $request)
 
         $part = $totalAdmissions - $totalAdmissionsNull;
 
-        $percentage = ($part/$totalAdmissions) * 100; 
+        $percentage = $totalAdmissions > 0 ? ($part/$totalAdmissions) * 100 : 0;
         return view('admin_dashboard', ['totalAdmissions' => $totalAdmissions, 'totalAdmissionsAccepted' => $totalAdmissionsAccepted,'totalAdmissionsRejected' => $totalAdmissionsRejected,'totalAdmissionsWaitlisted' => $totalAdmissionsWaitlisted,'totalAdmissionsNull' => $totalAdmissionsNull,'percentage' => $percentage, 'part' => $part,]);
     }
+
+    public function filterYearDashboard(Request $request) {
+        $this->filter = $request->input('filterYear');
+
+    
+        $totalAdmissions = AdmissionInformation::whereYear('created_at', $this->filter)->count();
+        $totalAdmissionsAccepted = AdmissionInformation::where('application_status', 'accepted')
+            ->whereYear('created_at', $this->filter)
+            ->count();
+        $totalAdmissionsRejected = AdmissionInformation::where('application_status', 'rejected')
+            ->whereYear('created_at', $this->filter)
+            ->count();
+        $totalAdmissionsWaitlisted = AdmissionInformation::where('application_status', 'waitlist')
+            ->whereYear('created_at', $this->filter)
+            ->count();
+        $totalAdmissionsNull = AdmissionInformation::whereNull('application_status')
+            ->whereYear('created_at', $this->filter)
+            ->count();
+    
+        $part = $totalAdmissions - $totalAdmissionsNull;
+    
+        $percentage = $totalAdmissions > 0 ? ($part/$totalAdmissions) * 100 : 0;
+    
+        $admissions = AdmissionInformation::whereYear('created_at', $this->filter)->get();
+    
+        return view('admin_dashboard', [
+            'admissions' => $admissions,
+            'part' => $part,
+            'filter' => $this->filter, 
+            'totalAdmissions' => $totalAdmissions,
+            'totalAdmissionsAccepted' => $totalAdmissionsAccepted,
+            'totalAdmissionsRejected' => $totalAdmissionsRejected,
+            'totalAdmissionsWaitlisted' => $totalAdmissionsWaitlisted,
+            'totalAdmissionsNull' => $totalAdmissionsNull,
+            'percentage' => $percentage
+        ]);
+    }
+    
+    
+    
 
 
     public function showAll($id)
     {
         $student = AdmissionInformation::findOrFail($id);
-        return view('showAll', ['student' => $student]);
+        return view('admin_see_details', ['student' => $student]);
     }
 
     

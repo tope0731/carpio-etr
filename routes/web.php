@@ -51,6 +51,17 @@ Route::get('/admin/waitlisted-admissions', [AdmissionController::class, 'showWai
 Route::post('/admission/waitlist/{id}', [AdmissionController::class, 'waitlist'])->name('admission.waitlist');
 
 
+Route::get('/admin/admission/{id}', [AdmissionController::class, 'showAll'])->name('admission.showAll');
+
+// Filter
+Route::get('/filterYearDashboard', [AdmissionController::class, 'filterYearDashboard'])->name('filterYearDashboard');
+Route::get('/filterYear', [AdmissionController::class, 'filterYear'])->name('filterYear');
+Route::get('/filterYearAccepted', [AdmissionController::class, 'filterYearAccepted'])->name('filterYearAccepted');
+Route::get('/filterYearRejected', [AdmissionController::class, 'filterYearRejected'])->name('filterYearRejected');
+
+Route::get('/filterYearWaitlisted', [AdmissionController::class, 'filterYearWaitlisted'])->name('filterYearWaitlisted');
+
+
 
 
 

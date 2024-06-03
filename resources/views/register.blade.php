@@ -32,6 +32,20 @@
                             <input type="email" name="email" class="form-control" id="email" placeholder="name@example.com" required>
                         </div>
                         <div class="mb-3">
+                            <select id="campus" name="campus" required>
+                                <option value="">Select Campus</option>
+                                <option value="alaminos">Alaminos City Campus</option>
+                                <option value="asingan">Asingan Campus</option>
+                                <option value="bayambang">Bayambang Campus</option>
+                                <option value="binmaley">Binmaley Campus</option>
+                                <option value="infanta">Infanta Campus</option>
+                                <option value="lingayen">Lingayen Campus</option>
+                                <option value="san carlos">San Carlos City Campus</option>
+                                <option value="sta maria">Sta. Maria Campus</option>
+                                <option value="urdaneta">Urdaneta City Campus</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
                             <input type="password" name="password" class="form-control" id="password" required>
                         </div>

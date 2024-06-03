@@ -14,6 +14,7 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
@@ -25,22 +26,25 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
                 <div class="sidebar-brand-text mx-3">Admin - {{ Auth::user()->name }}</div>
+                
             </a>
             
+            <div class="mx-3" style="color: yellow;">{{ Auth::user()->campus }} City Campus</div><br>
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item {{ request()->is('admin/dashboard*') ? 'active' : '' }}">
                 <a class="nav-link" href="/admin/dashboard">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Dashboard</span>
+                </a>
             </li>
 
             <!-- Divider -->
@@ -48,14 +52,15 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+                Applicants
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-            <a class="nav-link" href="/admin/admissions">
+            <li class="nav-item {{ request()->is('admin/admissions*') ? 'active' : '' }}">
+                <a class="nav-link" href="/admin/admissions">
                     <i class="fas fa-fw fa-table"></i>
-                <span>All Applicants</span></a>
+                    <span>All Applicants</span>
+                </a>
             </li>
 
             <!-- Divider -->
@@ -64,21 +69,28 @@
                 STATUS
             </div>
 
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
+            <!-- Accepted -->
+            <li class="nav-item {{ request()->is('admin/accepted-admissions*') ? 'active' : '' }}">
                 <a class="nav-link" href="/admin/accepted-admissions">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Accepted</span></a>
+                    <span>Accepted</span>
+                </a>
             </li>
-            <li class="nav-item">
+
+            <!-- Rejected -->
+            <li class="nav-item {{ request()->is('admin/rejected-admissions*') ? 'active' : '' }}">
                 <a class="nav-link" href="/admin/rejected-admissions">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Rejected</span></a>
+                    <span>Rejected</span>
+                </a>
             </li>
-            <li class="nav-item">
+
+            <!-- Waitlisted -->
+            <li class="nav-item {{ request()->is('admin/waitlisted-admissions*') ? 'active' : '' }}">
                 <a class="nav-link" href="/admin/waitlisted-admissions">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Waitlisted</span></a>
+                    <span>Waitlisted</span>
+                </a>
             </li>
 
             
@@ -158,7 +170,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>Copyright &copy; PSU ADMISSION SYSTEM by ci.ci.ci 2024</span>
                     </div>
                 </div>
             </footer>
@@ -170,27 +182,9 @@
     </div>
     <!-- End of Page Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 
