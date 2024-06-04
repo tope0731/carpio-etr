@@ -53,7 +53,7 @@
 </style>
   
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">All Applicants</h1>
+            <h1 class="h3 mb-0 text-gray-800">Pending Applicants</h1>
                         <form action="{{ route('filterYear') }}" method="GET">
                             <div class="dropdown">
                             <button class="dropbtn">{{ $filter ?? 'Filter by year' }}</button>
@@ -77,7 +77,7 @@
 
     @if($admissions->isEmpty())
         <div class="alert alert-info mt-3" role="alert">
-            No admissions found.
+            No pending admissions found.
         </div>
     @else
         <table class="table mt-3">

@@ -5,6 +5,9 @@ use App\Http\Controllers\RequirementsController;
 use App\Http\Controllers\AdmissionController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\EmailController;
+
+
 //Auth
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'registerPost'])->name('register');
@@ -42,6 +45,7 @@ Route::get('/student/{id}', [AdmissionController::class, 'showResult'])->name('s
 // Admin routes
 Route::get('/admin/dashboard', [AdmissionController::class, 'dashboard'])->name('admissions.dashboard');
 Route::get('/admin/admissions', [AdmissionController::class, 'index'])->name('admissions.index');
+Route::get('/admin/pending-admissions', [AdmissionController::class, 'pending'])->name('admissions.pending');
 Route::get('/admin/admission/{id}', [AdmissionController::class, 'showAll'])->name('admission.showAll');
 Route::get('/admin/accepted-admissions', [AdmissionController::class, 'showAccepted'])->name('admissions.accepted');
 Route::post('/admission/accept/{id}', [AdmissionController::class, 'accept'])->name('admission.accept');
@@ -62,6 +66,9 @@ Route::get('/filterYearRejected', [AdmissionController::class, 'filterYearReject
 Route::get('/filterYearWaitlisted', [AdmissionController::class, 'filterYearWaitlisted'])->name('filterYearWaitlisted');
 
 
+//email
+
+Route::get('/email', [EmailController::class, 'index']);
 
 
 

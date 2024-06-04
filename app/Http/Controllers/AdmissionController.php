@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\AdmissionInformation;
+use Mail;
+use App\Mail\NotifyApplicant;
 
 
 class AdmissionController extends Controller
@@ -264,11 +266,18 @@ public function showAccepted()
     return view('admin_accepted', ['acceptedAdmissions' => $acceptedAdmissions]);
 }
 
+//TODO: DITO ACCEPT
 public function accept($id)
 {
     $admission = AdmissionInformation::findOrFail($id);
     $admission->application_status = 'accepted';
     $admission->save();
+
+    $subject = "Accepted";
+    $body = 'We are happy to inform you the you are accepted to PSU';
+    $email = $admission->email;
+
+    Mail::to($email)->send(new NotifyApplicant($subject, $body));
 
     return redirect()->route('admissions.index')->with('success', 'Applicant accepted successfully.');
 }
@@ -280,11 +289,19 @@ public function showRejected()
     return view('admin_rejected', ['acceptedAdmissions' => $acceptedAdmissions]);
 }
 
+//TODO: DITO REJECT
 public function reject($id)
 {
     $admission = AdmissionInformation::findOrFail($id);
     $admission->application_status = 'rejected  ';
     $admission->save();
+
+
+    $subject = "Rejected";
+    $body = 'We are sorry to inform you the your application is rejected';
+    $email = $admission->email;
+
+    Mail::to($email)->send(new NotifyApplicant($subject, $body));
 
     return redirect()->route('admissions.index')->with('success', 'Applicant rejected successfully.');
 }
@@ -296,13 +313,27 @@ public function showWaitlisted()
     return view('admin_waitlist', ['acceptedAdmissions' => $acceptedAdmissions]);
 }
 
+//TODO: DITO WAITLIST
 public function waitlist($id)
 {
     $admission = AdmissionInformation::findOrFail($id);
     $admission->application_status = 'waitlist';
     $admission->save();
 
+    $subject = "Waitlisted";
+    $body = 'We want to let you know that your application has been placed on our waitlist';
+    $email = $admission->email;
+
+    Mail::to($email)->send(new NotifyApplicant($subject, $body));
+
     return redirect()->route('admissions.index')->with('success', 'Applicant rejected successfully.');
+}
+
+public function pending()
+{
+    $admissions = AdmissionInformation::whereNull('application_status')->get();
+    // return view('admissions.accepted', compact('acceptedAdmissions'));
+    return view('admin_pending', ['admissions' => $admissions]);
 }
 
 

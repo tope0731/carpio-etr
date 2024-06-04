@@ -65,7 +65,6 @@
                             </div>
                         </form>
                 </div>
-                
 
                     <!-- Content Row -->
                     <div class="row">

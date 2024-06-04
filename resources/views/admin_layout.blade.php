@@ -63,6 +63,13 @@
                 </a>
             </li>
 
+            <li class="nav-item {{ request()->is('admin/pending-admissions*') ? 'active' : '' }}">
+                <a class="nav-link" href="/admin/pending-admissions">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Pending Applicants</span>
+                </a>
+            </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider">
             <div class="sidebar-heading">
